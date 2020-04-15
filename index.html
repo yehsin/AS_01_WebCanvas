@@ -12,7 +12,6 @@
     <body >
         <div id = "The_Canvas" >
             <canvas id="myCanvas" width= "1000" height =  "500" ></canvas>
-            
             <div id = "myPalette" class = "set">
                 <div class = "unique">
                     <select id = "font" >
@@ -32,9 +31,14 @@
                         <option value = "initial">initial</option>
                     </select>
                     <label for="color-input" id="color-label" style="background-color: red" ></label>
-                    <input type="checkbox" id="color-input" checked></input>
+                    <input type="checkbox" id="color-input"></input>
                 </div>
                 <div class = "unique">
+                    <div float = "left" display  = "block">
+                        <input type = "checkbox" id = "fillcheck"><label background-color = "tomato">fill </label>
+                        <input type = "checkbox" id = "fillcheck"><label font = "large"></label>
+                    </div>
+                    
                     <div id="color-picker" height = "150" width = "162">
                         <canvas id="color-block" height="150" width="137"></canvas>
                         <canvas id="color-strip" height="150" width="25"></canvas>
@@ -42,35 +46,37 @@
                     
                 </div>
                 
-                <input float = "right" type = "range" id = "brush" min = "0" max = "50" step = "1" value = "10" ><image id = "brush_icon" src = "brush.png" float = "right"> </image></input>
+                <input float = "right" type = "range" id = "brush" min = "0" max = "50" step = "1" value = "10" ><image id = "brush_icon" src = "./icon/brush.png" float = "right"> </image></input>
                 
 
                 <table >
                     <tr class = "row">
-                        <td><button type = "button" class = "btn2" id = "erase" style="background-image:url(51.png)" onclick = erase()></td>
-                        <td><button type = "button" class = "btn2" id = "pencil" style="background-image:url(a2.png)" onclick = pencil()></td>
-                        <td><button type = "button" class = "btn2" id = "aaa" style="background-image:url(line.png)" onclick = download()></td>
+                        <td><button type = "button" class = "btn2" id = "erase" style="background-image:url(./icon/51.png)" onclick = erase()></td>
+                        <td><button type = "button" class = "btn2" id = "pencil" style="background-image:url(./icon/a2.png)" onclick = pencil()></td>
+                        <td><button type = "button" class = "btn2" id = "aaa" style="background-image:url(./icon/line.png)" onclick = download()></td>
 
                     </tr>
                     <tr class = "row">
-                        <td><button type = "button" class = "btn1" id = "circle" style="background-image:url(circle.png)" onclick = DrawCircle()></td>
-                        <td><button type = "button" class = "btn1" id = "triangle" style="background-image:url(tri.png)" onclick = DrawTriangle()></td>
-                        <td><button type = "button" class = "btn1" id = "Square" style="background-image:url(squ.png)" onclick = DrawSquare()></td>
+                        <td><button type = "button" class = "btn1" id = "circle" style="background-image:url(./icon/circle.png)" onclick = DrawCircle()></td>
+                        <td><button type = "button" class = "btn1" id = "triangle" style="background-image:url(./icon/tri.png)" onclick = DrawTriangle()></td>
+                        <td><button type = "button" class = "btn1" id = "Square" style="background-image:url(./icon/rect.png)" onclick = DrawRectangle()></td>
                     </tr>
                     <tr class = "row">
-                        <td><button type = "button" class = "btn1" id = "circle_emp" style="background-image:url(circle.png)" onclick = Drawcircle()></td>
-                        <td><button type = "button" class = "btn1" id = "triangle_emp" style="background-image:url(tri.png)" onclick = Drawtriangle()></td>
-                        <td><button type = "button" class = "btn1" id = "Square_emp" style="background-image:url(squ.png)" onclick = Drawsquare()></td>
+                        <td><button type = "button" class = "btn1" id = "circle_emp" style="background-image:url(./icon/emp_circle.png)" onclick = Drawcircle()></td>
+                        <td><button type = "button" class = "btn1" id = "triangle_emp" style="background-image:url(./icon/emp_tri.png)" onclick = Drawtriangle()></td>
+                        <td><button type = "button" class = "btn1" id = "Square_emp" style="background-image:url(./icon/emp_rect.png)" onclick = Drawrectangle()></td>
                     </tr>
                     <tr class = "row">
-                        <td><button type = "button" class = "btn2" id = "undo" style="background-image:url(undo.png)" ></td>
-                        <td><button type = "button" class = "btn2" id = "redo" style="background-image:url(redo.png)"></td>
-                        <td><button type = "button" class = "btn2" id = "reset" style="background-image:url(reset.png)" onclick = clearPad()></td>
+                        <td><button type = "button" class = "btn2" id = "undo" style="background-image:url(./icon/undo.png)" ></td>
+                        <td><button type = "button" class = "btn2" id = "redo" style="background-image:url(./icon/redo.png)"></td>
+                        <td><button type = "button" class = "btn2" id = "reset" style="background-image:url(./icon/reset.png)" onclick = clearPad()></td>
                     </tr>
                     <tr class = "row">
-                        <td><button type = "button" class = "btn2" id = "Download" style="background-image:url(dw.png)" onclick = download()></td>
-                        <td><input type = "file" accept = "image/*" class = "btn2" id = "upload" style="background-image:url(up.png)" onclick = upload.onchange></td>
-                        <td><button type = "button" class = "btn2" id = "Text" style="background-image:url(text.png)" onclick = text()></td>
+                        <td><button type = "button" class = "btn2" id = "Download" style="background-image:url(./icon/dw.png)" onclick = download()></td>
+                        <td style = "background-image: url(./icon/up.png)" id = "hidd">
+                                <input type = "file" accept = "image/*" class = "btn2" id = "upload"  onclick = upload.onchange>
+                        </td>
+                        <td><button type = "button" class = "btn2" id = "Text" style="background-image:url(./icon/text.png)" onclick = text()></td>
                     </tr>
                 </table>
             </div>

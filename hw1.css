@@ -18,24 +18,24 @@
     position: absolute;
     background-color: white;
     border: 50px solid transparent;
-    -moz-border-image: url(3.png) 30 30 stretch;
+    -moz-border-image: url(./border/3.png) 30 30 stretch;
     /* 給 Firefox 看*/
-    -webkit-border-image: url(3.png) 100 50 stretch;
+    -webkit-border-image: url(./border/3.png) 100 50 stretch;
     /* 給 Safari 與 Chrome 看*/
-    -o-border-image: url(3.png) 30 30 stretch;
+    -o-border-image: url(/border/3.png) 30 30 stretch;
     /* 給 Opera 看*/
-    border-image: url(3.png) 100 50 stretch;
+    border-image: url(./border/3.png) 100 50 stretch;
 }
 
 #myPalette {
     border: 50px solid transparent;
-    -moz-border-image: url(21.png) 30 30 stretch;
+    -moz-border-image: url(./border/21.png) 30 30 stretch;
     /* 給 Firefox 看*/
-    -webkit-border-image: url(21.png) 100 50 stretch;
+    -webkit-border-image: url(./border/21.png) 100 50 stretch;
     /* 給 Safari 與 Chrome 看*/
-    -o-border-image: url(21.png) 30 30 stretch;
+    -o-border-image: url(./border/21.png) 30 30 stretch;
     /* 給 Opera 看*/
-    border-image: url(21.png) 100 50 stretch;
+    border-image: url(./border/21.png) 100 50 stretch;
 }
 
 button {
@@ -79,7 +79,7 @@ table {
 }
 
 body {
-    background-image: url(1.jpg);
+    background-image: url(./image/1.jpg);
     background-size: 200%;
     background-repeat: no-repeat;
 }
@@ -95,7 +95,7 @@ body {
     float: right;
 }
 
-input[type="checkbox"] {
+#color-input {
     display: none;
 }
 
@@ -111,7 +111,7 @@ input[type="checkbox"] {
     background-color: #CCC;
     float: right;
     margin: 5px;
-    cursor: url('/cursor/a2.png'), pointer;
+    cursor: url('./cursor/a2.png'), pointer;
 }
 
 #funct {
@@ -193,4 +193,45 @@ input[type="checkbox"] {
 
 #brush_icon {
     position: relative;
+}
+
+#hidd {
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#upload {
+    margin: 0;
+    opacity: 0;
+    z-index: 2;
+}
+
+#fillcheck {
+    -webkit-appearance: none;
+    vertical-align: middle;
+    margin: 5px;
+    margin-top: 0;
+    background: #fff;
+    border: #999 solid 1px;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+}
+
+#fillcheck:checked {
+    background: #3190e8;
+}
+
+#fillchecked:checked::after {
+    content: '';
+    top: 3px;
+    left: 3px;
+    position: relative;
+    background: transparent;
+    height: 6px;
+    width: 10px;
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
