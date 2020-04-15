@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>hw1</title>
+
+        <link rel="stylesheet" type="text/css" href="hw1.css">
+        
+    </head>
+
+    <body >
+        <div id = "The_Canvas" >
+            <canvas id="myCanvas" width= "1000" height =  "500" ></canvas>
+            
+            <div id = "myPalette" class = "set">
+                <div class = "unique">
+                    <select id = "font" >
+                        <option value = "Georgia">Georgia</option>
+                        <option value = "Palatino Linotype">Palatino Linotype</option>
+                        <option value = "Book Antiqua">Book Antiqua</option>
+                        <option value = "Times New Roman">Times New Roman</option>
+                        <option value = "Arial">Arial</option>
+                        <option value = "Helvetica">Helvetica</option>
+                        <option value = "Arial Black">Arial Black</option>
+                        <option value = "Impact">Impact</option>
+                        <option value = "Lucida Sans Unicode">Lucida Sans Unicode</option>
+                        <option value = "Tahoma">Tahoma</option>
+                        <option value = "Verdana">Verdana</option>
+                        <option value = "Courier New">Courier New</option>
+                        <option value = "Lucida Console">Lucida Console</option>
+                        <option value = "initial">initial</option>
+                    </select>
+                    <label for="color-input" id="color-label" style="background-color: red" ></label>
+                    <input type="checkbox" id="color-input" checked></input>
+                </div>
+                <div class = "unique">
+                    <div id="color-picker" height = "150" width = "162">
+                        <canvas id="color-block" height="150" width="137"></canvas>
+                        <canvas id="color-strip" height="150" width="25"></canvas>
+                    </div>
+                    
+                </div>
+                
+                <input float = "right" type = "range" id = "brush" min = "0" max = "50" step = "1" value = "10" ><image id = "brush_icon" src = "brush.png" float = "right"> </image></input>
+                
+
+                <table >
+                    <tr class = "row">
+                        <td><button type = "button" class = "btn2" id = "erase" style="background-image:url(51.png)" onclick = erase()></td>
+                        <td><button type = "button" class = "btn2" id = "pencil" style="background-image:url(a2.png)" onclick = pencil()></td>
+                        <td><button type = "button" class = "btn2" id = "aaa" style="background-image:url(line.png)" onclick = download()></td>
+
+                    </tr>
+                    <tr class = "row">
+                        <td><button type = "button" class = "btn1" id = "circle" style="background-image:url(circle.png)" onclick = DrawCircle()></td>
+                        <td><button type = "button" class = "btn1" id = "triangle" style="background-image:url(tri.png)" onclick = DrawTriangle()></td>
+                        <td><button type = "button" class = "btn1" id = "Square" style="background-image:url(squ.png)" onclick = DrawSquare()></td>
+                    </tr>
+                    <tr class = "row">
+                        <td><button type = "button" class = "btn1" id = "circle_emp" style="background-image:url(circle.png)" onclick = Drawcircle()></td>
+                        <td><button type = "button" class = "btn1" id = "triangle_emp" style="background-image:url(tri.png)" onclick = Drawtriangle()></td>
+                        <td><button type = "button" class = "btn1" id = "Square_emp" style="background-image:url(squ.png)" onclick = Drawsquare()></td>
+                    </tr>
+                    <tr class = "row">
+                        <td><button type = "button" class = "btn2" id = "undo" style="background-image:url(undo.png)" ></td>
+                        <td><button type = "button" class = "btn2" id = "redo" style="background-image:url(redo.png)"></td>
+                        <td><button type = "button" class = "btn2" id = "reset" style="background-image:url(reset.png)" onclick = clearPad()></td>
+                    </tr>
+                    <tr class = "row">
+                        <td><button type = "button" class = "btn2" id = "Download" style="background-image:url(dw.png)" onclick = download()></td>
+                        <td><input type = "file" accept = "image/*" class = "btn2" id = "upload" style="background-image:url(up.png)" onclick = upload.onchange></td>
+                        <td><button type = "button" class = "btn2" id = "Text" style="background-image:url(text.png)" onclick = text()></td>
+                    </tr>
+                </table>
+            </div>
+        </div> 
+        <input class="set" id="word" type="text" value=""/>
+
+        
+
+        
+        <script src="hw1.js"></script>   
+    </body>
+
+</html>
