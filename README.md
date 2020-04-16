@@ -396,6 +396,7 @@ link.click();
 
 ## Demo Video
 {%youtube fRksEy2gNuM%}
+https://www.youtube.com/watch?v=fRksEy2gNuM&t=448s
 
 ## Gitlab page link
 https://github.com/yehsin/AS_01_WebCanvas
