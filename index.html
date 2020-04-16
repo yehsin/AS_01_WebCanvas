@@ -12,6 +12,7 @@
     <body >
         <div id = "The_Canvas" >
             <canvas id="myCanvas" width= "1000" height =  "500" ></canvas>
+            
             <div id = "myPalette" class = "set">
                 <div class = "unique">
                     <select id = "font" >
@@ -33,17 +34,18 @@
                     <label for="color-input" id="color-label" style="background-color: red" ></label>
                     <input type="checkbox" id="color-input"></input>
                 </div>
+                <div float = "left" display  = "block">
+                    <input type = "number" id = "sideinput" ><input type = "submit" value = "side" onclick = sidechange() width = "10px">
+                </div>
                 <div class = "unique">
-                    <div float = "left" display  = "block">
-                        <input type = "checkbox" id = "fillcheck"><label background-color = "tomato">fill </label>
-                        <input type = "checkbox" id = "fillcheck"><label font = "large"></label>
-                    </div>
-                    
+                     
                     <div id="color-picker" height = "150" width = "162">
                         <canvas id="color-block" height="150" width="137"></canvas>
                         <canvas id="color-strip" height="150" width="25"></canvas>
-                    </div>
-                    
+                    </div >
+
+                    <image src = "./icon/paint.png"></image>
+                   
                 </div>
                 
                 <input float = "right" type = "range" id = "brush" min = "0" max = "50" step = "1" value = "10" ><image id = "brush_icon" src = "./icon/brush.png" float = "right"> </image></input>
@@ -53,8 +55,8 @@
                     <tr class = "row">
                         <td><button type = "button" class = "btn2" id = "erase" style="background-image:url(./icon/51.png)" onclick = erase()></td>
                         <td><button type = "button" class = "btn2" id = "pencil" style="background-image:url(./icon/a2.png)" onclick = pencil()></td>
-                        <td><button type = "button" class = "btn2" id = "aaa" style="background-image:url(./icon/line.png)" onclick = download()></td>
-
+                        <td><button type = "button" class = "btn2" id = "Text" style="background-image:url(./icon/text.png)" onclick = text()></td>
+                    
                     </tr>
                     <tr class = "row">
                         <td><button type = "button" class = "btn1" id = "circle" style="background-image:url(./icon/circle.png)" onclick = DrawCircle()></td>
@@ -76,17 +78,21 @@
                         <td style = "background-image: url(./icon/up.png)" id = "hidd">
                                 <input type = "file" accept = "image/*" class = "btn2" id = "upload"  onclick = upload.onchange>
                         </td>
-                        <td><button type = "button" class = "btn2" id = "Text" style="background-image:url(./icon/text.png)" onclick = text()></td>
+                        <td><button type = "button" class = "btn2" id = "poly" style="background-image:url(./icon/poly.png)" onclick = Drawpolygon()></td>
                     </tr>
                 </table>
+                
             </div>
+
         </div> 
         <input class="set" id="word" type="text" value=""/>
 
+                            
         
-
         
-        <script src="hw1.js"></script>   
+        <script src="shape.js"></script>
+        <script src="hw1.js"></script>
+        <script src="palette.js"></script>
     </body>
 
 </html>

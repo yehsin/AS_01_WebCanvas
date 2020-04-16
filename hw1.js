@@ -93,8 +93,10 @@ function mouseMove(evt) {
         var mousepos = getMousePos(canvas, evt);
         if (mode == "pen") {
             context.globalCompositeOperation = "source-over";
-            context.moveTo(mousepos.x, mousepos.y); //old xy
-            context.lineTo(mouse_x, mouse_y);
+            context.lineCap = 'round';
+            context.lineJoin = 'round';
+            context.moveTo(mouse_x, mouse_y); //old xy
+            context.lineTo(mousepos.x, mousepos.y);
             context.stroke();
         } else if (mode == "circle") {
 
@@ -104,29 +106,6 @@ function mouseMove(evt) {
             context.arc(dragStartLocation.x, dragStartLocation.y, radius, 0, 2 * Math.PI, false);
             if (fill) context.fill();
             else {
-                context.stroke();
-            }
-        } else if (mode == "polygon") {
-            context.globalCompositeOperation = "source-over";
-            context.putImageData(snapshot, 0, 0);
-            var coordinate = [];
-            index = 0, angle = 2 * Math.PI / sides;
-            radius = Math.sqrt(Math.pow(mousepos.x - dragStartLocation.x, 2) + Math.pow(mousepos.y - dragStartLocation.y, 2)) / 2
-            for (index; index < sides; index++) {
-                coordinate[index] = {
-                    x: dragStartLocation.x + radius * Math.cos(angle),
-                    y: dragStartLocation.y - radius * Math.sin(angle)
-                };
-                angle += (2 * Math.PI) / sides;
-            }
-            context.beginPath();
-            context.moveTo(coordinate[0].x, coordinate[0].y);
-            for (index = 1; index < sides; index++) {
-                context.lineTo(coordinate[index].x, coordinate[index].y);
-            }
-            if (fill) context.fill();
-            else {
-                context.closePath();
                 context.stroke();
             }
         } else if (mode == "Triangle") {
@@ -153,12 +132,12 @@ function mouseMove(evt) {
                 context.closePath();
                 context.stroke();
             }
-        } else if (mode == "Square") {
+        } else if (mode == "polygon") {
             context.globalCompositeOperation = "source-over";
             context.putImageData(snapshot, 0, 0);
             var coordinate = [];
             index = 0, angle = 2 * Math.PI / sides;
-            radius = Math.sqrt(Math.pow(evt.x - 50 - dragStartLocation.x, 2) + Math.pow(evt.y - 50 - dragStartLocation.y, 2)) / 2
+            radius = Math.sqrt(Math.pow(mousepos.x - dragStartLocation.x, 2) + Math.pow(mousepos.y - dragStartLocation.y, 2)) / 2
             for (index; index < sides; index++) {
                 coordinate[index] = {
                     x: dragStartLocation.x + radius * Math.cos(angle),
@@ -189,7 +168,7 @@ function mouseMove(evt) {
 
         } else {
             context.globalCompositeOperation = "destination-out";
-            context.arc(mouse_x, mouse_y, 10, 0, 2 * Math.PI);
+            context.arc(mouse_x, mouse_y, brush.value, 0, 2 * Math.PI);
             context.fill();
             if (fill) context.fill();
             else {
@@ -215,7 +194,6 @@ function mouseUp(evt) {
         }
     }
     if (mode == "Triangle") {
-
         context.putImageData(snapshot, 0, 0);
         var coordinate = [];
         index = 0, angle = 2 * Math.PI / sides;
@@ -238,11 +216,11 @@ function mouseUp(evt) {
             context.stroke();
         }
     }
-    if (mode == "square") {
+    if (mode == "polygon") {
         context.putImageData(snapshot, 0, 0);
         var coordinate = [];
         index = 0, angle = 2 * Math.PI / sides;
-        radius = Math.sqrt(Math.pow(evt.x - 50 - dragStartLocation.x, 2) + Math.pow(evt.y - 50 - dragStartLocation.y, 2)) / 2
+        radius = Math.sqrt(Math.pow(mousepos.x - dragStartLocation.x, 2) + Math.pow(mousepos.y - dragStartLocation.y, 2)) / 2
         for (index; index < sides; index++) {
             coordinate[index] = {
                 x: dragStartLocation.x + radius * Math.cos(angle),
@@ -292,14 +270,92 @@ function changeStep(e) {
 
 
 //style
+function DrawCircle() {
+    mode = "circle";
+    fill = true;
+    canvas.style.cursor = "url('./icon/circle.png'),move";
+    context.fillStyle = rgbcolor;
+}
+
+function DrawTriangle() {
+    mode = "Triangle";
+    fill = true;
+    sides = 3;
+    canvas.style.cursor = "url('./icon/tri.png'),zoom-in";
+    context.fillStyle = rgbcolor;
+}
+
+function DrawSquare() {
+    mode = "Square";
+    sides = 4;
+    fill = true;
+    context.fillStyle = rgbcolor;
+}
+
+function DrawRectangle() {
+    mode = "rect";
+    fill = true;
+    canvas.style.cursor = "url('./icon/rect.png'),zoom-in";
+    context.fillStyle = rgbcolor;
+}
+
+function Drawsquare() {
+    mode = "Square";
+    sides = 4;
+    fill = false;
+}
+
+function Drawrectangle() {
+    mode = "rect";
+    canvas.style.cursor = "url('./icon/emp_rect.png'),zoom-in";
+    fill = false;
+}
+
+function Drawtriangle() {
+    mode = "Triangle";
+    fill = false;
+    sides = 3;
+    canvas.style.cursor = "url('./icon/emp_tri.png'),zoom-in";
+}
+
+function Drawcircle() {
+    mode = "circle";
+    fill = false;
+    canvas.style.cursor = "url('./icon/emp_circle.png'),move";
+}
+
+function Drawpolygon() {
+    mode = "polygon";
+    fill = true;
+    context.fillStyle = rgbcolor;
+}
+
 function pencil() {
     mode = "pen";
-    canvas.style.cursor = "url('5.png'),pointer";
+    canvas.style.cursor = "url('./cursor/a2.png'),pointer";
 }
 
 function erase() {
     mode = "eraser";
-    canvas.style.cursor = "url('/cursor/51.png'),crosshair";
+    canvas.style.cursor = "url('./icon/51.png'),crosshair";
+}
+
+function text() {
+    mode = "text";
+    canvas.style.cursor = "text";
+}
+
+brush.oninput = function() {
+    context.lineWidth = this.value;
+    context.font = this.value + "px " + Font.value;
+}
+
+font.onchange = function() {
+    context.font = Brush.value + "px " + this.value;
+}
+
+function sidechange() {
+    sides = document.getElementById("sideinput").value;
 }
 
 undo.addEventListener('click', function() {
@@ -314,64 +370,13 @@ function clearPad(e) {
     context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function DrawCircle() {
-    mode = "circle";
-    fill = true;
-    canvas.style.cursor = "url('./icon/pen.png'),move";
-    context.fillStyle = rgbcolor;
-}
-
-function DrawTriangle() {
-    mode = "Triangle";
-    fill = true;
-    sides = 3;
-    canvas.style.cursor = "url('pen.png'),zoom-in";
-    context.fillStyle = rgbcolor;
-}
-
-function DrawSquare() {
-    mode = "Square";
-    sides = 4;
-    fill = true;
-    context.fillStyle = rgbcolor;
-}
-
-function DrawRectangle() {
-    mode = "rect";
-    fill = true;
-    context.fillStyle = rgbcolor;
-}
-
-function Drawsquare() {
-    mode = "Square";
-    sides = 4;
-    fill = false;
-}
-
-function Drawrectangle() {
-    mode = "rect";
-    fill = false;
-}
-
-function Drawtriangle() {
-    mode = "Triangle";
-    fill = false;
-    sides = 3;
-    canvas.style.cursor = "url('pen.png'),zoom-in";
-}
-
-function Drawcircle() {
-    mode = "circle";
-    fill = false;
-    canvas.style.cursor = "url('pen.png'),move";
-}
-
 function download() {
     var link = document.createElement('a');
     link.download = 'myCanvas.png';
     link.href = canvas.toDataURL()
     link.click();
 }
+
 
 upload.onchange = function upload() {
     var img = new Image();
@@ -447,16 +452,3 @@ function changelabel(e) {
 
 }
 colorBlock.addEventListener('click', changelabel, false);
-
-function text() {
-    mode = "text";
-}
-
-brush.oninput = function() {
-    context.lineWidth = this.value;
-    context.font = this.value + "px " + Font.value;
-}
-
-font.onchange = function() {
-    context.font = Brush.value + "px " + this.value;
-}
