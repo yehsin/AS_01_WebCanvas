@@ -79,8 +79,8 @@
     }
     
     body {
-        background-image: url(./image/1.jpg);
-        background-size: 200%;
+        background-image: url(./image/bg.jpg);
+        background-size: cover;
         background-repeat: no-repeat;
     }
     
@@ -214,4 +214,52 @@
         -webkit-border-radius: 3px;
         border-radius: 3px;
         border: 1px solid #BBBBBB;
+    }
+    
+    @media screen and (max-width: 768px) {
+        body {
+            background-size: 300%;
+        }
+        #The_Canvas {
+            flex-direction: column;
+        }
+        #myCanvas {
+            position: relative;
+            width: 100%;
+            height: 60%;
+            float: top;
+        }
+        .set {
+            position: relative;
+            float: bottom;
+            width: 100%;
+            height: 30%;
+        }
+        #row {
+            flex: column;
+        }
+    }
+    
+    @media(max-width: 1024px) {
+        body {
+            background-size: cover;
+        }
+        #The_Canvas {
+            flex-direction: column;
+        }
+        #myCanvas {
+            position: relative;
+            width: 100%;
+            height: 60%;
+            float: top;
+        }
+        .set {
+            position: relative;
+            float: bottom;
+            width: 100%;
+            height: 30%;
+        }
+        #row {
+            flex: column;
+        }
     }

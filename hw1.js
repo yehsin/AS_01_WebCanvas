@@ -59,7 +59,7 @@ function mouseDown(evt) {
                 window.removeEventListener('keyup', texthandle);
             } else {
                 word.value += e.key;
-                console.log(context.font);
+                context.globalCompositeOperation = "source-over";
                 text_content = word.value;
                 context.fillText(text_content, mousepos.x, mousepos.y);
                 window.addEventListener('mousedown', function() {
@@ -99,7 +99,6 @@ function mouseMove(evt) {
             context.lineTo(mousepos.x, mousepos.y);
             context.stroke();
         } else if (mode == "circle") {
-
             context.globalCompositeOperation = "source-over";
             context.putImageData(snapshot, 0, 0);
             radius = Math.sqrt(Math.pow(mousepos.x - dragStartLocation.x, 2) + Math.pow(mousepos.y - dragStartLocation.y, 2)) / 2
@@ -170,11 +169,7 @@ function mouseMove(evt) {
             context.globalCompositeOperation = "destination-out";
             context.arc(mouse_x, mouse_y, brush.value, 0, 2 * Math.PI);
             context.fill();
-            if (fill) context.fill();
-            else {
-                context.closePath();
-                context.stroke();
-            }
+
         }
         mouse_x = mousepos.x;
         mouse_y = mousepos.y;
@@ -377,13 +372,20 @@ function download() {
     link.click();
 }
 
-
+var img_x = 0,
+    img_y = 0;
 upload.onchange = function upload() {
     var img = new Image();
     img.onload = function() {
-        canvas.width = this.width;
-        canvas.height = this.height;
-        context.drawImage(this, 0, 0, canvas.width, canvas.height);
+        if (this.width > canvas.width) this.width = canvas.width;
+        if (this.width > canvas.width) this.width = canvas.height;
+        context.drawImage(this, img_x, img_y, this.width, this.height);
+        img_x += this.width;
+        img_y += this.height;
+        if (img_x > canvas.width || img_y > canvas.height) {
+            img_x = 0;
+            img_y = 0;
+        }
         URL.revokeObjectURL(src);
     }
     var file = this.files[0];
